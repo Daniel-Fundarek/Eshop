@@ -1,0 +1,9 @@
+# Idea
+.idea/
+target
+assignment-3.iml
+
+# VS code
+.settings/
+.classpath
+.project
