@@ -10,7 +10,8 @@ public class ProductService implements IProductService{
     private ProductRepository repository;
     @Autowired
     public ProductService(ProductRepository repository) {
-      /*  this.repository = repository;
+        this.repository = repository;
+        /*
         Product a = new Product();
         a.setAmount(5);
         a.setDescription("cute");
@@ -42,7 +43,7 @@ public class ProductService implements IProductService{
         newProduct.setName(request.getName());
         newProduct.setPrice(request.getPrice());
         newProduct.setUnit(request.getUnit());
-        return this.repository.save(newProduct);
+        return  this.repository.save(newProduct);
 
     }
 }
