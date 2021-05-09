@@ -15,4 +15,8 @@ public class Controller {
     public String hello(){
         return "Hello world";
     }
+    @GetMapping("")
+    public String test(){
+        return  "test";
+    }
 }
