@@ -3,9 +3,7 @@ package sk.stuba.fei.uim.oop.assignment3;
 import lombok.Getter;
 import org.apache.coyote.ajp.AjpNio2Protocol;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,5 +24,11 @@ public class Controller {
             result.add(new ProductResponse(a));
         }
         return result*/
+    }
+    @PostMapping()
+    public ProductResponse addProduct(@RequestBody ProductRequest request){
+        return new ProductResponse(this.service.create(request));
+
+
     }
 }

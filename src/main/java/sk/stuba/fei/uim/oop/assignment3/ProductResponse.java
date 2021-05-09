@@ -2,7 +2,7 @@ package sk.stuba.fei.uim.oop.assignment3;
 
 import lombok.Getter;
 
-import javax.persistence.GeneratedValue;
+
 
 @Getter
 public class ProductResponse {
