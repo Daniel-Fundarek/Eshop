@@ -67,4 +67,25 @@ public class Controller {
             return new ResponseEntity<>(HttpStatus.OK);
         }
     }
+
+    @GetMapping("/{id}/amount")
+    public ResponseEntity<AmountOfProduct> getAmountOfProduct(@PathVariable("id") ProductRequestById request) {
+        if (!this.service.doesProductExist(request)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        else{
+            return new ResponseEntity<>(new AmountOfProduct(this.service.getAmount(request)), HttpStatus.OK);
+        }
+    }
+    @PostMapping("/{id}/amount")
+    public ResponseEntity postAmountOfProduct(@PathVariable("id") ProductRequestById request, @RequestBody ProductRequest productRequest) {
+        if (!this.service.doesProductExist(request)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        else{
+            this.service.changeAmount(request,productRequest);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
+
 }

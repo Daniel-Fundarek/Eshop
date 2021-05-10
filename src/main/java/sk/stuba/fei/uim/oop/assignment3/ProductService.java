@@ -85,4 +85,20 @@ public class ProductService implements IProductService{
         var product = getProductById(request);
         this.repository.delete(product);
     }
+
+    @Override
+    public Integer getAmount(ProductRequestById request) {
+        var product = getProductById(request);
+        return  product.getAmount();
+    }
+
+    @Override
+    public void changeAmount(ProductRequestById request, ProductRequest productRequest) {
+        var product = getProductById(request);
+        product.setAmount(product.getAmount());
+        if(productRequest.getAmount()!=null) {
+            product.setAmount(productRequest.getAmount());
+        }
+        this.repository.save(product);
+    }
 }

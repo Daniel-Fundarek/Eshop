@@ -9,5 +9,7 @@ public interface IProductService {
  Boolean doesProductExist(ProductRequestById request);
  Product updateProductById(ProductRequestById request, ProductRequest productRequest);
  void delete(ProductRequestById request);
+ Integer getAmount(ProductRequestById request);
+ void changeAmount(ProductRequestById request, ProductRequest productRequest);
 }
 
