@@ -8,5 +8,6 @@ public interface IProductService {
  Product getProductById(ProductRequestById request);
  Boolean doesProductExist(ProductRequestById request);
  Product updateProductById(ProductRequestById request, ProductRequest productRequest);
- }
+ void delete(ProductRequestById request);
+}
 

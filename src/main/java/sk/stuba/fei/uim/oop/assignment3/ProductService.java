@@ -77,9 +77,12 @@ public class ProductService implements IProductService{
         if(productRequest.getUnit()!=null) {
             product.setUnit(productRequest.getUnit());
         }
-
-
-        return getProductById(request);
+        return this.repository.save(product);
     }
 
+    @Override
+    public void delete(ProductRequestById request) {
+        var product = getProductById(request);
+        this.repository.delete(product);
+    }
 }

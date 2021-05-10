@@ -21,7 +21,7 @@ public class Controller {
     private IProductService service;
 
     @GetMapping()
-    public List<ProductResponse> getAllProducts(){
+    public List<ProductResponse> getAllProducts() {
         return this.service.getAll().stream().map(product -> new ProductResponse(product)).collect(Collectors.toList());
       /*  var result = new ArrayList<ProductResponse>();
         for(Product a : this.service.getAll()){
@@ -29,35 +29,42 @@ public class Controller {
         }
         return result*/
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<ProductResponse> getProductById(@PathVariable("id") ProductRequestById request){
-        if (!this.service.doesProductExist(request)){
+    public ResponseEntity<ProductResponse> getProductById(@PathVariable("id") ProductRequestById request) {
+        if (!this.service.doesProductExist(request)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else{
-            return new ResponseEntity<>(new ProductResponse(this.service.getProductById(request)),HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new ProductResponse(this.service.getProductById(request)), HttpStatus.OK);
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductResponse> updateProductById(@PathVariable("id") ProductRequestById request, @RequestBody ProductRequest productRequest){
-        if (!this.service.doesProductExist(request)){
+    public ResponseEntity<ProductResponse> updateProductById(@PathVariable("id") ProductRequestById request, @RequestBody ProductRequest productRequest) {
+        if (!this.service.doesProductExist(request)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else{
-            return new ResponseEntity<>(new ProductResponse(this.service.updateProductById(request,productRequest)),HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new ProductResponse(this.service.updateProductById(request, productRequest)), HttpStatus.OK);
         }
     }
 
 
-
-
-
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public ProductResponse addProduct(@RequestBody ProductRequest request){
+    public ProductResponse addProduct(@RequestBody ProductRequest request) {
         return new ProductResponse(this.service.create(request));
 
 
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteProductById(@PathVariable("id") ProductRequestById request) {
+
+        if (!this.service.doesProductExist(request)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            this.service.delete(request);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
     }
 }
