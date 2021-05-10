@@ -7,5 +7,6 @@ public interface IProductService {
  Product create(ProductRequest request);
  Product getProductById(ProductRequestById request);
  Boolean doesProductExist(ProductRequestById request);
+ Product updateProductById(ProductRequestById request, ProductRequest productRequest);
  }
 

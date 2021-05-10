@@ -59,4 +59,27 @@ public class ProductService implements IProductService{
         return this.repository.existsById(Long.parseLong(request.getId()));
     }
 
+    @Override
+    public Product updateProductById(ProductRequestById request, ProductRequest productRequest) {
+            var product = getProductById(request);
+        if(productRequest.getAmount()!=null) {
+            product.setAmount(productRequest.getAmount());
+        }
+        if(productRequest.getDescription()!=null) {
+            product.setDescription(productRequest.getDescription());
+        }
+        if(productRequest.getName()!=null) {
+            product.setName(productRequest.getName());
+        }
+        if(productRequest.getPrice()!=null) {
+            product.setPrice(productRequest.getPrice());
+        }
+        if(productRequest.getUnit()!=null) {
+            product.setUnit(productRequest.getUnit());
+        }
+
+
+        return getProductById(request);
+    }
+
 }

@@ -30,13 +30,24 @@ public class Controller {
         return result*/
     }
     @GetMapping("/{id}")
-    @ResponseStatus()
-    public ProductResponse getProductById(@PathVariable("id") ProductRequestById request){
-
-            return new ProductResponse(this.service.getProductById(request));
-
+    public ResponseEntity<ProductResponse> getProductById(@PathVariable("id") ProductRequestById request){
+        if (!this.service.doesProductExist(request)){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        else{
+            return new ResponseEntity<>(new ProductResponse(this.service.getProductById(request)),HttpStatus.OK);
+        }
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductResponse> updateProductById(@PathVariable("id") ProductRequestById request, @RequestBody ProductRequest productRequest){
+        if (!this.service.doesProductExist(request)){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        else{
+            return new ResponseEntity<>(new ProductResponse(this.service.updateProductById(request,productRequest)),HttpStatus.OK);
+        }
+    }
 
 
 
