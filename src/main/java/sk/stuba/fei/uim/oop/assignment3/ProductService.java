@@ -46,4 +46,17 @@ public class ProductService implements IProductService{
         return  this.repository.save(newProduct);
 
     }
+
+    @Override
+    public Product getProductById(ProductRequestById request) {
+        Long id = Long.parseLong(request.getId());
+        return this.repository.findAllById(id);
+
+    }
+
+    @Override
+    public Boolean doesProductExist(ProductRequestById request) {
+        return this.repository.existsById(Long.parseLong(request.getId()));
+    }
+
 }
