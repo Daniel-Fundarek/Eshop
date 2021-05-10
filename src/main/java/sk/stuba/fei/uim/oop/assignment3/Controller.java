@@ -32,10 +32,9 @@ public class Controller {
     @GetMapping("/{id}")
     @ResponseStatus()
     public ProductResponse getProductById(@PathVariable("id") ProductRequestById request){
-        if (!this.service.doesProductExist(request))
-        else{
+
             return new ProductResponse(this.service.getProductById(request));
-        }
+
     }
 
 
