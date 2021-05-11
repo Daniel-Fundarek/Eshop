@@ -27,12 +27,9 @@ public class CartResponse {
 
 
 
-            for (ItemInCart  a :  cart.shoppingList){
-                a.productId.equals(newShoppingList.produtId);
 
-            }
         }
-        this.shoppingList;
+       // this.shoppingList;
 
     }
 }

@@ -11,6 +11,9 @@ import javax.persistence.*;
 public class ItemInCart {
     private Integer productId;
     private Integer amount;
+
     @Id
     private Long id;
+
+
 }
