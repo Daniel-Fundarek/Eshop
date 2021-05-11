@@ -1,35 +1,37 @@
 package sk.stuba.fei.uim.oop.assignment3.cart;
 
-import sk.stuba.fei.uim.oop.assignment3.cart.Cart;
-import sk.stuba.fei.uim.oop.assignment3.cart.ShoppingList;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+@NoArgsConstructor
 
 public class CartResponse {
-    long id;
-    List<ShoppingList> shoppingList = new ArrayList<>();
-    Boolean payed;
+    @Getter
+    @Setter
+    private long id;
+    @Getter
+    @Setter
+    private boolean payed;
+    private List<ShoppingList> shoppingList = new ArrayList<>();
 
+   /* public CartResponse(long id, boolean payed, List<ItemInCart> shoppingList) {
+        this.id = id;
+        this.payed = payed;
+        for (int i = 0; i < shoppingList.size(); i++){
+            this.shoppingList.add(new ShoppingList(shoppingList.get(i).getProductId(),shoppingList.get(i).getAmount()));
+        }
+    }*/
     public CartResponse(Cart cart) {
         this.id = cart.getId();
-
-        ShoppingList newShoppingList = new ShoppingList();
-        var list = cart.getShoppingList();
-        if(!list.isEmpty()){
-            for(int i=0; i< list.size();i++){
-                if(i == 0){
-                    newShoppingList.produtId = list.get(0).getProductId();
-                }
-            }
-
-
-
-
-
-
+        this.payed = cart.isPayed();
+        for (int i = 0; i < cart.getShoppingList().size(); i++){
+            this.shoppingList.add(new ShoppingList(cart.getShoppingList().get(i).getProductId(),cart.getShoppingList().get(i).getAmount()));
         }
-       // this.shoppingList;
-
     }
+
 }

@@ -13,6 +13,7 @@ public class ItemInCart {
     private Integer amount;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
 

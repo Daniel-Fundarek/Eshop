@@ -1,6 +1,6 @@
 package sk.stuba.fei.uim.oop.assignment3.cart;
 
-import lombok.AllArgsConstructor;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,11 +19,11 @@ public class Cart {
     private List<ItemInCart> shoppingList = new ArrayList<>();
     private boolean payed;
 
-    public Cart(ArrayList<ItemInCart> shoppingList, boolean payed) {
+   /* public Cart(ArrayList<ItemInCart> shoppingList, boolean payed) {
         this.shoppingList = shoppingList;
         this.payed = payed;
     }
     public void setShoppingListItem(ItemInCart item){
         shoppingList.add(item);
-    }
+    }*/
 }
