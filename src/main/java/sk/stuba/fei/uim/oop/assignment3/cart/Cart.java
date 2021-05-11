@@ -16,11 +16,14 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @OneToMany
-    List<ItemInCart> shoppingList = new ArrayList<>();
-    boolean payed;
+    private List<ItemInCart> shoppingList = new ArrayList<>();
+    private boolean payed;
 
     public Cart(ArrayList<ItemInCart> shoppingList, boolean payed) {
         this.shoppingList = shoppingList;
         this.payed = payed;
+    }
+    public void setShoppingListItem(ItemInCart item){
+        shoppingList.add(item);
     }
 }
