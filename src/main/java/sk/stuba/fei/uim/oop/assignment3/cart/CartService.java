@@ -82,14 +82,17 @@ public class CartService implements ICartService{
                 if(body.getAmount() <= amount) {
 
                     productService.changeAmount(body.getProductId(),new ProductRequest(- body.getAmount()));
-                    var item = itemService.findItemById( body.getProductId());
+                    var item = itemService.findItemByProductId( body.getProductId());
+                   // var item = itemService.findItemById( body.getProductId());
                    // item.toString();
                     if (item == null) {
                         Item newItem = new Item( body.getProductId(), body.getAmount());
                         cart.getShoppingList().add(itemService.updateItem(newItem));
                     } else {
                         item.setAmount(item.getAmount() + body.getAmount());
-                        cart.getShoppingList().add(itemService.updateItem(item));
+
+                        cart = findItemInCartAndChangeAmount(cart, body.getProductId(),  itemService.updateItem(item));
+                        //itemService.updateItem(item); //tento updatnuty item musim dat do listu
                     }
                     return repository.save(cart);
                 }
@@ -106,6 +109,7 @@ public class CartService implements ICartService{
         }
 
 
+
        /* var shoppingList = cart.getShoppingList();
         for(int i =0;i < shoppingList.size();i++){
             if(shoppingList.get(i).getProductId() == body.getProductId()){
@@ -115,7 +119,15 @@ public class CartService implements ICartService{
         return null;*/
     }
 
-
+    @Override
+    public Cart findItemInCartAndChangeAmount(Cart cart, Long productId,Item item) {
+        for(int i =0 ; i< cart.getShoppingList().size(); i++)
+            if(cart.getShoppingList().get(i).getProductId().equals(productId)){
+                 cart.getShoppingList().remove(i);
+                 cart.getShoppingList().add(item);
+            }
+        return cart;
+    }
 
 
 }

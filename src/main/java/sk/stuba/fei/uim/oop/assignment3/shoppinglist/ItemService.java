@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sk.stuba.fei.uim.oop.assignment3.cart.ICartService;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,9 +25,21 @@ public class ItemService implements IItemService {
 
     @Override
     public Item findItemById(Long productId) {
+       // Optional<Item> itemOptional = repository.findByProductId(productId);
         Optional<Item> itemOptional = repository.findById(productId);
         Item item = itemOptional.orElse(null);
         return item;
+    }
+
+    @Override
+    public Item findItemByProductId(Long productId) {
+        List<Item> items = repository.findAll();
+        for(int i = 0; i< items.size(); i++){
+            if(items.get(i).getProductId().equals(productId) ){
+                return items.get(i);
+            }
+        }
+        return null;
     }
 
     @Override

@@ -2,6 +2,8 @@ package sk.stuba.fei.uim.oop.assignment3.cart;
 
 
 
+import sk.stuba.fei.uim.oop.assignment3.shoppinglist.Item;
+
 import java.util.List;
 
 
@@ -12,4 +14,5 @@ public interface ICartService {
 
     void delete(long id);
     Cart addItem(Long id, BodyRequest body );
+    Cart findItemInCartAndChangeAmount(Cart cart, Long productId,Item item);
 }
