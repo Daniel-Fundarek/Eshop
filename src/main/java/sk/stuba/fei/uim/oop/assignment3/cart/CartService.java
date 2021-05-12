@@ -39,4 +39,12 @@ public class CartService implements ICartService{
          newCart.getShoppingList().add(itemService.create());
         return repository.save(newCart);
     }
+
+    @Override
+    public Cart getCartById(Long request) {
+        return repository.findById(request);
+    }
+
+
+
 }
