@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface CartRepo extends CrudRepository<Cart,Long> {
     List<Cart> findAll();
-    Cart findById(Long request);
+
 }

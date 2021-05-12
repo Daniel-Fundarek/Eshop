@@ -24,15 +24,12 @@ public class CartController{
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CartResponse> findCartById(@PathVariable("id")Long  request){
-        if(request.equals(null) && service.getCartById(request) == null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-            return new ResponseEntity<>(new CartResponse(service.getCartById(request)), HttpStatus.OK);
-        }
-    };
+    public ResponseEntity<CartResponse> findCartById(@PathVariable("id") Long  request){
+        return new ResponseEntity<>(new CartResponse(service.getById(request)), HttpStatus.OK);
 
+    }
+    @DeleteMapping("/{id}")
+    public
 
     @Autowired
     public void setService(ICartService service) {
