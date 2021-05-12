@@ -14,8 +14,8 @@ public class ItemService implements IItemService {
     @Override
     public Item create() {
         Item newItem = new Item();
-        newItem.setAmount(0);
-        newItem.setProductId(0);
+        //newItem.setAmount(0);
+        //newItem.setProductId(0);
         return this.repository.save(newItem);
     }
     //@Autowired

@@ -24,12 +24,20 @@ public class CartController{
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CartResponse> findCartById(@PathVariable("id") Long  request){
-        return new ResponseEntity<>(new CartResponse(service.getById(request)), HttpStatus.OK);
+    public CartResponse findCartById(@PathVariable("id") Long  request){
+        return new CartResponse(service.getById(request));
 
     }
     @DeleteMapping("/{id}")
-    public
+    public void  delete(@PathVariable("id") Long request){
+        service.delete(request);
+    }
+    @PostMapping("/{id}/add")
+    public Cart addItem(@PathVariable Long request, @RequestBody BodyRequest body){
+
+
+        return null;
+    }
 
     @Autowired
     public void setService(ICartService service) {

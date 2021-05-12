@@ -11,5 +11,5 @@ public interface ICartService {
     Cart getById(long id);
 
     void delete(long id);
-
+    Cart addItem(Long id, BodyRequest body );
 }

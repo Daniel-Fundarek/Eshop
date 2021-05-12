@@ -38,8 +38,8 @@ public class CartService implements ICartService{
     @Override
     public Cart create() {
          Cart newCart = new Cart();
-         newCart.setPayed(true);
-         newCart.getShoppingList().add(itemService.create());
+         newCart.setPayed(false);
+       //  newCart.getShoppingList().add(itemService.create());
         return repository.save(newCart);
     }
 
@@ -57,6 +57,16 @@ public class CartService implements ICartService{
             this.itemRepository.delete(cart.getShoppingList().get(i));
         }
         this.repository.delete(cart);
+    }
+
+    @Override
+    public Cart addItem(Long id, BodyRequest body) {
+        Cart cart = this.repository.findById(id).orElseThrow();
+        var shoppingList = cart.getShoppingList();
+        for(int i =0;i < shoppingList.size();i++){
+            if(shoppingList.get(i).getProductId() == )
+        }
+        return null;
     }
 
 
