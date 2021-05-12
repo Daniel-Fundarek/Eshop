@@ -49,14 +49,13 @@ public class ProductService implements IProductService{
 
     @Override
     public Product getProductById(ProductRequestById request) {
-        Long id = Long.parseLong(request.getId());
-        return this.repository.findAllById(id);
+        return this.repository.findAllById(request.getId());
 
     }
 
     @Override
     public Boolean doesProductExist(ProductRequestById request) {
-        return this.repository.existsById(Long.parseLong(request.getId()));
+        return this.repository.existsById(request.getId());
     }
 
     @Override
@@ -88,7 +87,7 @@ public class ProductService implements IProductService{
     }
 
     @Override
-    public Integer getAmount(ProductRequestById request) {
+    public Integer getAmount(ProductRequestById request ) {
         var product = getProductById(request);
         return  product.getAmount();
     }

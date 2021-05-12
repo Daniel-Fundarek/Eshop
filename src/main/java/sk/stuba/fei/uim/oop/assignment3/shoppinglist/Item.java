@@ -17,10 +17,10 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private int productId;
+    private Long productId;
     private int amount;
 
-    public Item(int productId, int amount) {
+    public Item(Long productId, int amount) {
         this.productId = productId;
         this.amount = amount;
     }

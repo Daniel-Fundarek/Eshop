@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class BodyRequest {
-    private Long productId;
+    private int productId;
     private int amount;
 }

@@ -13,4 +13,9 @@ public class ProductRequest {
     private Integer amount;
     private String unit;
     private Double price;
+
+    public ProductRequest(Integer amount) {
+        this.amount = amount;
+    }
 }
+

@@ -10,6 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ItemResponse {
-    private int productId;
+    private long productId;
     private int amount;
 }

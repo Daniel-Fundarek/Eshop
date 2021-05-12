@@ -9,7 +9,9 @@ import java.util.NoSuchElementException;
 
 @ControllerAdvice
 public class NotFoundControllerAdvice {
-
+    @ExceptionHandler(value = {BadRequestException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public void handleException1() {}
     @ExceptionHandler(value = {NotFoundException.class, NoSuchElementException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public void handleException() {}
