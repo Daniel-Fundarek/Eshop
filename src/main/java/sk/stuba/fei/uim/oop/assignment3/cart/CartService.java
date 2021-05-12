@@ -78,13 +78,14 @@ public class CartService implements ICartService{
         }
         else{
             if(productService.doesProductExist(body.getProductId())) {
-                int amount =productService.getAmount(body.getProductId());
+                int amount = productService.getAmount(body.getProductId());
                 if(body.getAmount() <= amount) {
 
-                    productService.changeAmount(body.getProductId(),new ProductRequest(amount - body.getAmount()));
-                    var item = itemService.findItemById((long) body.getProductId());
-                    if (item.equals(null)) {
-                        Item newItem = new Item((long) body.getProductId(), body.getAmount());
+                    productService.changeAmount(body.getProductId(),new ProductRequest(- body.getAmount()));
+                    var item = itemService.findItemById( body.getProductId());
+                   // item.toString();
+                    if (item == null) {
+                        Item newItem = new Item( body.getProductId(), body.getAmount());
                         cart.getShoppingList().add(itemService.updateItem(newItem));
                     } else {
                         item.setAmount(item.getAmount() + body.getAmount());

@@ -49,13 +49,13 @@ public class ProductService implements IProductService{
 
     @Override
     public Product getProductById(long request) {
-        return this.repository.findAllById((long) request);
+        return this.repository.findAllById( request);
 
     }
 
     @Override
     public Boolean doesProductExist(long request) {
-        return this.repository.existsById((long) request);
+        return this.repository.existsById( request);
     }
 
     @Override

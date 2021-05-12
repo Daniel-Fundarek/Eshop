@@ -21,6 +21,6 @@ public class Cart {
 
     @OneToMany
     private List<Item> shoppingList = new ArrayList<>();
-    private boolean payed;
+    private boolean payed =false;
 
 }

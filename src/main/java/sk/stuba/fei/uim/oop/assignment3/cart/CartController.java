@@ -33,10 +33,9 @@ public class CartController{
         service.delete(request);
     }
     @PostMapping("/{id}/add")
-    public Cart addItem(@PathVariable Long request, @RequestBody BodyRequest body){
+    public Cart addItem(@PathVariable("id") Long request, @RequestBody BodyRequest body){
 
-
-        return null;
+        return service.addItem(request,body);
     }
 
     @Autowired
