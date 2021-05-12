@@ -5,11 +5,11 @@ import java.util.List;
 public interface IProductService {
  List<Product> getAll();
  Product create(ProductRequest request);
- Product getProductById(ProductRequestById request);
- Boolean doesProductExist(ProductRequestById request);
- Product updateProductById(ProductRequestById request, ProductRequest productRequest);
- void delete(ProductRequestById request);
- Integer getAmount(ProductRequestById request);
- void changeAmount(ProductRequestById request, ProductRequest productRequest);
+ Product getProductById(long request);
+ Boolean doesProductExist(long request);
+ Product updateProductById(long request, ProductRequest productRequest);
+ void delete(long request);
+ Integer getAmount(long request);
+ void changeAmount(long request, ProductRequest productRequest);
 }
 

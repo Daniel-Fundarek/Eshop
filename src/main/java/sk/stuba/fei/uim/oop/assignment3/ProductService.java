@@ -48,18 +48,18 @@ public class ProductService implements IProductService{
     }
 
     @Override
-    public Product getProductById(ProductRequestById request) {
-        return this.repository.findAllById((long) request.getId());
+    public Product getProductById(long request) {
+        return this.repository.findAllById((long) request);
 
     }
 
     @Override
-    public Boolean doesProductExist(ProductRequestById request) {
-        return this.repository.existsById((long) request.getId());
+    public Boolean doesProductExist(long request) {
+        return this.repository.existsById((long) request);
     }
 
     @Override
-    public Product updateProductById(ProductRequestById request, ProductRequest productRequest) {
+    public Product updateProductById(long request, ProductRequest productRequest) {
             var product = getProductById(request);
       /*  if(productRequest.getAmount()!=null) {
             product.setAmount(productRequest.getAmount());
@@ -81,23 +81,23 @@ public class ProductService implements IProductService{
     }
 
     @Override
-    public void delete(ProductRequestById request) {
+    public void delete(long request) {
         var product = getProductById(request);
         this.repository.delete(product);
     }
 
     @Override
-    public Integer getAmount(ProductRequestById request ) {
+    public Integer getAmount(long request ) {
         var product = getProductById(request);
         return  product.getAmount();
     }
 
     @Override
-    public void changeAmount(ProductRequestById request, ProductRequest productRequest) {
+    public void changeAmount(long request, ProductRequest productRequest) {
         var product = getProductById(request);
         product.setAmount(product.getAmount());
         if(productRequest.getAmount()!=null) {
-            product.setAmount(productRequest.getAmount());
+            product.setAmount(product.getAmount() + productRequest.getAmount());
         }
         this.repository.save(product);
     }

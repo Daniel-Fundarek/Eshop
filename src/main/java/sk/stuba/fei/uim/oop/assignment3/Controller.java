@@ -31,7 +31,7 @@ public class Controller {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductResponse> getProductById(@PathVariable("id") ProductRequestById request) {
+    public ResponseEntity<ProductResponse> getProductById(@PathVariable("id") long request) {
         if (!this.service.doesProductExist(request)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
@@ -40,7 +40,7 @@ public class Controller {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductResponse> updateProductById(@PathVariable("id") ProductRequestById request, @RequestBody ProductRequest productRequest) {
+    public ResponseEntity<ProductResponse> updateProductById(@PathVariable("id") long request, @RequestBody ProductRequest productRequest) {
         if (!this.service.doesProductExist(request)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
@@ -58,7 +58,7 @@ public class Controller {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteProductById(@PathVariable("id") ProductRequestById request) {
+    public ResponseEntity deleteProductById(@PathVariable("id") long request) {
 
         if (!this.service.doesProductExist(request)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -69,7 +69,7 @@ public class Controller {
     }
 
     @GetMapping("/{id}/amount")
-    public ResponseEntity<AmountOfProduct> getAmountOfProduct(@PathVariable("id") ProductRequestById request) {
+    public ResponseEntity<AmountOfProduct> getAmountOfProduct(@PathVariable("id") long request) {
         if (!this.service.doesProductExist(request)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -78,13 +78,13 @@ public class Controller {
         }
     }
     @PostMapping("/{id}/amount")
-    public ResponseEntity postAmountOfProduct(@PathVariable("id") ProductRequestById request, @RequestBody ProductRequest productRequest) {
+    public ResponseEntity<AmountOfProduct> postAmountOfProduct(@PathVariable("id") long request, @RequestBody ProductRequest productRequest) {
         if (!this.service.doesProductExist(request)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         else{
             this.service.changeAmount(request,productRequest);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(new AmountOfProduct(this.service.getAmount(request)),HttpStatus.OK);
         }
     }
 

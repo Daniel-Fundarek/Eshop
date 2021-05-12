@@ -77,11 +77,11 @@ public class CartService implements ICartService{
             // vrat nejako 400 este neviem ako mozno nejaku exception
         }
         else{
-            if(productService.doesProductExist(new ProductRequestById(body.getProductId()))) {
-                int amount =productService.getAmount(new ProductRequestById(body.getProductId()));
+            if(productService.doesProductExist(body.getProductId())) {
+                int amount =productService.getAmount(body.getProductId());
                 if(body.getAmount() <= amount) {
 
-                    productService.changeAmount(new ProductRequestById(body.getProductId()),new ProductRequest(amount - body.getAmount()));
+                    productService.changeAmount(body.getProductId(),new ProductRequest(amount - body.getAmount()));
                     var item = itemService.findItemById((long) body.getProductId());
                     if (item.equals(null)) {
                         Item newItem = new Item((long) body.getProductId(), body.getAmount());
