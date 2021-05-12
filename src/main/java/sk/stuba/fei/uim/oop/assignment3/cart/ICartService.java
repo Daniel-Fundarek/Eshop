@@ -16,4 +16,5 @@ public interface ICartService {
     Cart addItem(Long id, BodyRequest body );
     Cart findItemInCartAndChangeAmount(Cart cart, Long productId,Item item);
     Integer  isProductInCart(Cart cart, Long productId);
+    Cart createNewOrReuseItem(Cart cart, BodyRequest body);
 }

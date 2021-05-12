@@ -4,6 +4,7 @@ package sk.stuba.fei.uim.oop.assignment3.cart;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import sk.stuba.fei.uim.oop.assignment3.IProductService;
 import sk.stuba.fei.uim.oop.assignment3.ProductRequest;
 import sk.stuba.fei.uim.oop.assignment3.ProductRequestById;
@@ -81,27 +82,23 @@ public class CartService implements ICartService{
                 int amount = productService.getAmount(body.getProductId());
                 if(body.getAmount() <= amount) {
 
-                    productService.changeAmount(body.getProductId(),new ProductRequest(- body.getAmount()));
-                    //var item = itemService.findItemByProductId( body.getProductId());
+                 /*   productService.changeAmount(body.getProductId(),new ProductRequest(- body.getAmount()));
                     var index = isProductInCart(cart, body.getProductId());
                     Item item;
-                    if(index== null){
+                    if(index == null){
                        item = null;
                     }
                     else {
                         item = cart.getShoppingList().get(index);
                     }
-                   // var item = itemService.findItemById( body.getProductId());
-                   // item.toString();
                     if (item == null) {
                         Item newItem = new Item( body.getProductId(), body.getAmount());
                         cart.getShoppingList().add(itemService.updateItem(newItem));
                     } else {
                         item.setAmount(item.getAmount() + body.getAmount());
-
                         cart = findItemInCartAndChangeAmount(cart, body.getProductId(),  itemService.updateItem(item));
-                        //itemService.updateItem(item); //tento updatnuty item musim dat do listu
-                    }
+                    }*/
+                    cart = createNewOrReuseItem(cart,body);
                     return repository.save(cart);
                 }
                 else{
@@ -113,18 +110,7 @@ public class CartService implements ICartService{
                 // produkt neexistuje 404 not found
                 throw new NotFoundException();
             }
-
         }
-
-
-
-       /* var shoppingList = cart.getShoppingList();
-        for(int i =0;i < shoppingList.size();i++){
-            if(shoppingList.get(i).getProductId() == body.getProductId()){
-                shoppingList.get(i).setAmount(shoppingList.get(i).getAmount()+ body.getAmount());
-            }
-        }
-        return null;*/
     }
 
     @Override
@@ -145,6 +131,25 @@ public class CartService implements ICartService{
             }
         return null;
     }
-
+    @Override
+    public Cart createNewOrReuseItem(Cart cart , BodyRequest body){
+        productService.changeAmount(body.getProductId(),new ProductRequest(- body.getAmount()));
+        var index = isProductInCart(cart, body.getProductId());
+        Item item;
+        if(index == null){
+            item = null;
+        }
+        else {
+            item = cart.getShoppingList().get(index);
+        }
+        if (item == null) {
+            Item newItem = new Item( body.getProductId(), body.getAmount());
+            cart.getShoppingList().add(itemService.updateItem(newItem));
+        } else {
+            item.setAmount(item.getAmount() + body.getAmount());
+            cart = findItemInCartAndChangeAmount(cart, body.getProductId(),  itemService.updateItem(item));
+        }
+        return cart;
+    }
 
 }
