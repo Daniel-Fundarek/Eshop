@@ -82,7 +82,15 @@ public class CartService implements ICartService{
                 if(body.getAmount() <= amount) {
 
                     productService.changeAmount(body.getProductId(),new ProductRequest(- body.getAmount()));
-                    var item = itemService.findItemByProductId( body.getProductId());
+                    //var item = itemService.findItemByProductId( body.getProductId());
+                    var index = isProductInCart(cart, body.getProductId());
+                    Item item;
+                    if(index== null){
+                       item = null;
+                    }
+                    else {
+                        item = cart.getShoppingList().get(index);
+                    }
                    // var item = itemService.findItemById( body.getProductId());
                    // item.toString();
                     if (item == null) {
@@ -127,6 +135,15 @@ public class CartService implements ICartService{
                  cart.getShoppingList().add(item);
             }
         return cart;
+    }
+
+    @Override
+    public Integer isProductInCart(Cart cart, Long productId) {
+        for(int i =0 ; i< cart.getShoppingList().size(); i++)
+            if(cart.getShoppingList().get(i).getProductId().equals(productId)){
+               return i;
+            }
+        return null;
     }
 
 
