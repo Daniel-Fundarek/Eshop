@@ -1,4 +1,4 @@
-package sk.stuba.fei.uim.oop.assignment3.cart;
+package sk.stuba.fei.uim.oop.assignment3.cart2;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

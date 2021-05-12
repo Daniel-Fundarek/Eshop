@@ -1,7 +1,4 @@
-package sk.stuba.fei.uim.oop.assignment3.cart;
-
-import sk.stuba.fei.uim.oop.assignment3.cart.Cart;
-import sk.stuba.fei.uim.oop.assignment3.cart.ShoppingList;
+package sk.stuba.fei.uim.oop.assignment3.cart2;
 
 import java.util.ArrayList;
 import java.util.List;

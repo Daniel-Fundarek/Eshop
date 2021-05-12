@@ -1,4 +1,4 @@
-package sk.stuba.fei.uim.oop.assignment3.cart;
+package sk.stuba.fei.uim.oop.assignment3.cart2;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

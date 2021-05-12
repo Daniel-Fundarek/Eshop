@@ -1,30 +1,30 @@
 package sk.stuba.fei.uim.oop.assignment3.cart;
 
+
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sk.stuba.fei.uim.oop.assignment3.shoppinglist.IItemService;
 
 import java.util.List;
 
 @Service
 public class CartService implements ICartService{
-    private CartRepository repository;
-    private ItemInCartRepository itemRepository;
     @Autowired
-    public CartService(CartRepository repository, ItemInCartRepository itemRepository) {
+    @Setter
+    private IItemService itemService;
+    private CartRepo repository;
+
+
+    @Autowired
+    public CartService(CartRepo repository) {
         this.repository = repository;
-        this.itemRepository = itemRepository;
-    }
 
-    @Override
-    public Cart create() {
-
-        Cart newCart = new Cart();
-        newCart.setPayed(true);
+        /* var cart = new Cart();
+         cart.setPayed(false);
+         this.repository.save(cart);*/
 
 
-
-
-        return this.repository.save(newCart);
     }
 
     @Override
@@ -32,5 +32,11 @@ public class CartService implements ICartService{
         return this.repository.findAll();
     }
 
-
+    @Override
+    public Cart create() {
+         Cart newCart = new Cart();
+         newCart.setPayed(true);
+         newCart.getShoppingList().add(itemService.create());
+        return repository.save(newCart);
+    }
 }
