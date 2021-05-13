@@ -1,4 +1,4 @@
-package sk.stuba.fei.uim.oop.assignment3;
+package sk.stuba.fei.uim.oop.assignment3.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -95,7 +95,7 @@ public class ProductService implements IProductService{
     @Override
     public void changeAmount(long request, ProductRequest productRequest) {
         var product = getProductById(request);
-        product.setAmount(product.getAmount());
+    //    product.setAmount(product.getAmount());
         if(productRequest.getAmount()!=null) {
             product.setAmount(product.getAmount() + productRequest.getAmount());
         }

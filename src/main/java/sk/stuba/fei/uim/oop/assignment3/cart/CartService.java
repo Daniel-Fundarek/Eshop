@@ -4,10 +4,8 @@ package sk.stuba.fei.uim.oop.assignment3.cart;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-import sk.stuba.fei.uim.oop.assignment3.IProductService;
-import sk.stuba.fei.uim.oop.assignment3.ProductRequest;
-import sk.stuba.fei.uim.oop.assignment3.ProductRequestById;
+import sk.stuba.fei.uim.oop.assignment3.product.IProductService;
+import sk.stuba.fei.uim.oop.assignment3.product.ProductRequest;
 import sk.stuba.fei.uim.oop.assignment3.exceptions.BadRequestException;
 import sk.stuba.fei.uim.oop.assignment3.exceptions.NotFoundException;
 import sk.stuba.fei.uim.oop.assignment3.shoppinglist.IItemService;
@@ -64,8 +62,12 @@ public class CartService implements ICartService{
     public void delete(long id) {
         Cart cart = getById(id);
         for(int i =0;i < cart.getShoppingList().size();i++){
-            productService.changeAmount(cart.getShoppingList().get(i).getProductId(),new ProductRequest((cart.getShoppingList().get(i).getAmount()))); // neviem ci to funguje
-            this.itemRepository.delete(cart.getShoppingList().get(i));
+            if(!cart.isPayed()){
+                productService.changeAmount(cart.getShoppingList().get(i).getProductId(),new ProductRequest((cart.getShoppingList().get(i).getAmount())));
+            }
+            Long delId = cart.getShoppingList().get(i).getId();
+            cart.getShoppingList().remove(i);
+            this.itemRepository.deleteById(delId);
         }
         this.repository.delete(cart);
     }

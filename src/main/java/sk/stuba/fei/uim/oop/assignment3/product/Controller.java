@@ -1,15 +1,10 @@
-package sk.stuba.fei.uim.oop.assignment3;
+package sk.stuba.fei.uim.oop.assignment3.product;
 
-import lombok.Getter;
-import org.apache.coyote.ajp.AjpNio2Protocol;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRange;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,8 +48,6 @@ public class Controller {
     @ResponseStatus(HttpStatus.CREATED)
     public ProductResponse addProduct(@RequestBody ProductRequest request) {
         return new ProductResponse(this.service.create(request));
-
-
     }
 
     @DeleteMapping("/{id}")
