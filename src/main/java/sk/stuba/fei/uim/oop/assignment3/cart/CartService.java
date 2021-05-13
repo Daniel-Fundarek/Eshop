@@ -64,6 +64,7 @@ public class CartService implements ICartService{
     public void delete(long id) {
         Cart cart = getById(id);
         for(int i =0;i < cart.getShoppingList().size();i++){
+            productService.changeAmount(cart.getShoppingList().get(i).getProductId(),new ProductRequest(cart.getShoppingList().get(i).getProductId()));
             this.itemRepository.delete(cart.getShoppingList().get(i));
         }
         this.repository.delete(cart);
@@ -81,23 +82,6 @@ public class CartService implements ICartService{
             if(productService.doesProductExist(body.getProductId())) {
                 int amount = productService.getAmount(body.getProductId());
                 if(body.getAmount() <= amount) {
-
-                 /*   productService.changeAmount(body.getProductId(),new ProductRequest(- body.getAmount()));
-                    var index = isProductInCart(cart, body.getProductId());
-                    Item item;
-                    if(index == null){
-                       item = null;
-                    }
-                    else {
-                        item = cart.getShoppingList().get(index);
-                    }
-                    if (item == null) {
-                        Item newItem = new Item( body.getProductId(), body.getAmount());
-                        cart.getShoppingList().add(itemService.updateItem(newItem));
-                    } else {
-                        item.setAmount(item.getAmount() + body.getAmount());
-                        cart = findItemInCartAndChangeAmount(cart, body.getProductId(),  itemService.updateItem(item));
-                    }*/
                     cart = createNewOrReuseItem(cart,body);
                     return repository.save(cart);
                 }
