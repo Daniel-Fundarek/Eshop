@@ -64,7 +64,7 @@ public class CartService implements ICartService{
     public void delete(long id) {
         Cart cart = getById(id);
         for(int i =0;i < cart.getShoppingList().size();i++){
-            productService.changeAmount(cart.getShoppingList().get(i).getProductId(),new ProductRequest(cart.getShoppingList().get(i).getProductId()));
+            productService.changeAmount(cart.getShoppingList().get(i).getProductId(),new ProductRequest((cart.getShoppingList().get(i).getAmount()))); // neviem ci to funguje
             this.itemRepository.delete(cart.getShoppingList().get(i));
         }
         this.repository.delete(cart);
@@ -135,5 +135,25 @@ public class CartService implements ICartService{
         }
         return cart;
     }
+
+    @Override
+    public Double payForCart(Long id) {
+        Cart cart = getById(id);
+        double finalPrice = 0;
+        if(cart.isPayed()){
+            throw new BadRequestException();
+            // vrat nejako 400 este neviem ako mozno nejaku exception
+        }
+        else{
+            for (int i =0; i < cart.getShoppingList().size();i++){
+                double price = productService.getProductById(cart.getShoppingList().get(i).getProductId()).getPrice();
+                finalPrice = finalPrice + price * cart.getShoppingList().get(i).getAmount();
+             }
+            cart.setPayed(true);
+            repository.save(cart);
+        }
+        return finalPrice;
+    }
+
 
 }
