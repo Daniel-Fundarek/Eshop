@@ -38,8 +38,8 @@ public class CartController{
         return new CartResponse(service.addItem(request,body));
     }
     @GetMapping("/{id}/pay")
-    public double pay(@PathVariable("id") Long request){
-        return service.payForCart(request);
+    public String pay(@PathVariable("id") Long request){
+        return String.valueOf(service.payForCart(request));
     }
 
     @Autowired
