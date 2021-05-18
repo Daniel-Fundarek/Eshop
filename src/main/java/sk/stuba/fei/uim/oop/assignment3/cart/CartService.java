@@ -61,7 +61,8 @@ public class CartService implements ICartService{
     @Override
     public void delete(long id) {
         Cart cart = getById(id);
-        for(int i =0;i < cart.getShoppingList().size();i++){
+       // for(int i =0;i < cart.getShoppingList().size();i++){
+       for(int i = cart.getShoppingList().size()-1;i >= 0 ;i--){
             if(!cart.isPayed()){
                 productService.changeAmount(cart.getShoppingList().get(i).getProductId(),new ProductRequest((cart.getShoppingList().get(i).getAmount())));
             }
@@ -81,20 +82,15 @@ public class CartService implements ICartService{
             // vrat nejako 400 este neviem ako mozno nejaku exception
         }
         else{
-            if(productService.doesProductExist(body.getProductId())) {
-                int amount = productService.getAmount(body.getProductId());
-                if(body.getAmount() <= amount) {
-                    cart = createNewOrReuseItem(cart,body);
-                    return repository.save(cart);
-                }
-                else{
-                    throw new BadRequestException();
-                    // not enough 400
-                }
+            productService.doesProductExist(body.getProductId());
+            int amount = productService.getAmount(body.getProductId());
+            if(body.getAmount() <= amount) {
+                cart = createNewOrReuseItem(cart,body);
+                return repository.save(cart);
             }
             else{
-                // produkt neexistuje 404 not found
-                throw new NotFoundException();
+                throw new BadRequestException();
+                // not enough 400
             }
         }
     }
