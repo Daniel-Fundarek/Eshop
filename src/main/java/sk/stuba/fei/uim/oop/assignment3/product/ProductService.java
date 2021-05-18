@@ -50,6 +50,7 @@ public class ProductService implements IProductService{
 
     @Override
     public Product getProductById(long request) {
+        doesProductExist1(request);
         return this.repository.findAllById( request);
 
     }
