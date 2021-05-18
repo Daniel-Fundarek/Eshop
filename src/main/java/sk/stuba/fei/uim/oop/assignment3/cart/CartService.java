@@ -79,11 +79,10 @@ public class CartService implements ICartService{
         Cart cart = getById(id);
         if(cart.isPayed()){
             throw new BadRequestException();
-            // vrat nejako 400 este neviem ako mozno nejaku exception
+            // vrat nejako 400
         }
         else{
-            productService.doesProductExist(body.getProductId());
-            int amount = productService.getAmount(body.getProductId());
+            int amount = productService.getAmount(body.getProductId()); // toto vracia 404
             if(body.getAmount() <= amount) {
                 cart = createNewOrReuseItem(cart,body);
                 return repository.save(cart);
@@ -113,6 +112,7 @@ public class CartService implements ICartService{
             }
         return null;
     }
+
     @Override
     public Cart createNewOrReuseItem(Cart cart , BodyRequest body){
         productService.changeAmount(body.getProductId(),new ProductRequest(- body.getAmount()));

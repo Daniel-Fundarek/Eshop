@@ -30,7 +30,6 @@ public class Controller {
 
     }
 
-
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public ProductResponse addProduct(@RequestBody ProductRequest request) {
@@ -46,6 +45,7 @@ public class Controller {
     public AmountOfProduct getAmountOfProduct(@PathVariable("id") long request) {
         return new AmountOfProduct(this.service.getAmount(request));
     }
+
     @PostMapping("/{id}/amount")
     public AmountOfProduct postAmountOfProduct(@PathVariable("id") long request, @RequestBody ProductRequest productRequest) {
         this.service.changeAmount(request,productRequest);
