@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import sk.stuba.fei.uim.oop.assignment3.product.IProductService;
 import sk.stuba.fei.uim.oop.assignment3.product.ProductRequest;
 import sk.stuba.fei.uim.oop.assignment3.exceptions.BadRequestException;
-import sk.stuba.fei.uim.oop.assignment3.exceptions.NotFoundException;
 import sk.stuba.fei.uim.oop.assignment3.shoppinglist.IItemService;
 import sk.stuba.fei.uim.oop.assignment3.shoppinglist.Item;
 import sk.stuba.fei.uim.oop.assignment3.shoppinglist.ItemRepo;
@@ -95,7 +94,7 @@ public class CartService implements ICartService{
     }
 
     @Override
-    public Cart findItemInCartAndChangeAmount(Cart cart, Long productId,Item item) {
+    public Cart swapItem(Cart cart, Long productId, Item item) {
         for(int i =0 ; i< cart.getShoppingList().size(); i++)
             if(cart.getShoppingList().get(i).getProductId().equals(productId)){
                  cart.getShoppingList().remove(i);
@@ -129,7 +128,7 @@ public class CartService implements ICartService{
             cart.getShoppingList().add(itemService.updateItem(newItem));
         } else {
             item.setAmount(item.getAmount() + body.getAmount());
-            cart = findItemInCartAndChangeAmount(cart, body.getProductId(),  itemService.updateItem(item));
+            cart = swapItem(cart, body.getProductId(),  itemService.updateItem(item));
         }
         return cart;
     }
