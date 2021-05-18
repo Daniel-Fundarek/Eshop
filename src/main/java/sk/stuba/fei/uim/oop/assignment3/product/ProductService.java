@@ -2,6 +2,7 @@ package sk.stuba.fei.uim.oop.assignment3.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sk.stuba.fei.uim.oop.assignment3.exceptions.NotFoundException;
 
 import java.util.List;
 
@@ -56,6 +57,12 @@ public class ProductService implements IProductService{
     @Override
     public Boolean doesProductExist(long request) {
         return this.repository.existsById( request);
+    }
+    @Override
+    public void doesProductExist1(long request){
+        if (this.repository.existsById(request) == false){
+            throw new NotFoundException();
+        }
     }
 
     @Override

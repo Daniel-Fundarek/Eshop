@@ -11,5 +11,6 @@ public interface IProductService {
  void delete(long request);
  Integer getAmount(long request);
  void changeAmount(long request, ProductRequest productRequest);
+ public void doesProductExist1(long request);
 }
 
