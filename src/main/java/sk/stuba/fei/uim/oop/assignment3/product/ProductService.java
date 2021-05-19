@@ -55,13 +55,14 @@ public class ProductService implements IProductService{
 
     }
 
-    @Override
-    public Boolean doesProductExist(long request) {
-        return this.repository.existsById( request);
-    }
+
+   // public Boolean doesProductExist(long request) {
+   //     return this.repository.existsById( request);
+   // }
+
     @Override
     public void doesProductExist1(long request){
-        if (this.repository.existsById(request) == false){
+        if (!this.repository.existsById(request)){
             throw new NotFoundException();
         }
     }
